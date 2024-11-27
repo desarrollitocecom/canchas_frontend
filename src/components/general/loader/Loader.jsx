@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Logo from '../../assets/logos/logo_sjl.png'
+import Logo from '../../../assets/logos/logo_sjl.png'
 
 const loader = () => {
     const { loading } = useSelector((state) => state.auth);

@@ -4,6 +4,7 @@ import fondo_sjl_bottom from '../../assets/backgrounds/fondo_sjl_bottom.png';
 import logo from '../../assets/logos/logo_sjl.png';
 import { Container } from '@mui/material';
 import LoginForm from '../../components/auth/login/LoginForm';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -24,6 +25,12 @@ const Login = () => {
             />
           </div>
           <LoginForm />
+          <div className='mt-6 text-xs flex justify-center'>
+            <p className='flex gap-1 text-gray-600'>
+              ¿No tienes una cuenta?
+              <Link to="/register" className='font-semibold hover:underline text-sky-600'>Registrate Aqui</Link>
+            </p>
+          </div>
         </div>
       </Container>
     </div>

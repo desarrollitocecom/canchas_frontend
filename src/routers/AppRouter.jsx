@@ -4,6 +4,8 @@ import PublicRouter from './PublicRouter'
 import Login from '../pages/Login/Login'
 import { useSelector } from 'react-redux'
 import Loader from '../components/general/loader/Loader'
+import Home from '../pages/Home/Home'
+import Layout from '../pages/Layout'
 
 const AppRouter = () => {
     const { loading } = useSelector((state) => state.auth);
@@ -15,7 +17,13 @@ const AppRouter = () => {
         },
         {
             path: "/",
-            element: <h1>Home</h1>
+            element: <Layout />,
+            children: [
+                {
+                    path: "/",
+                    element: <Home />
+                }
+            ]
         }
     ])
 

@@ -60,38 +60,31 @@ const MenuUser = () => {
                     }
                 }}
             >
-                {
-                    user ?
-                        (
-                            <>
-                                <Link to="/profile" className='flex items-center gap-2'>
-                                    <MenuItem className='!text-sm !py-3 w-full'>
-                                        Mi Perfil
-                                    </MenuItem>
-                                </Link>
-                                <Divider />
-                                <MenuItem
-                                    className='!text-sm !py-3 w-full'
-                                >
-                                    Cerrar Sesión
-                                </MenuItem>
-                            </>
-                        ):
-                        (
-                            <>
-                                <Link to="/register" className='flex items-center gap-2'>
-                                    <MenuItem className='!text-sm !py-3 w-full'>
-                                        Registrarse
-                                    </MenuItem>
-                                </Link>
-                                <Link to="/login" className='flex items-center gap-2'>
-                                    <MenuItem className='!text-sm !py-3 w-full'>
-                                        Inicia Sesión
-                                    </MenuItem>
-                                </Link>
-                            </>
-                        )
-                }
+                {user ? [
+                    <Link to="/profile" key="profile" className='flex items-center gap-2'>
+                        <MenuItem className='!text-sm !py-3 w-full'>
+                            Mi Perfil
+                        </MenuItem>
+                    </Link>,
+                    <Divider key="divider" />,
+                    <MenuItem
+                        key="logout"
+                        className='!text-sm !py-3 w-full'
+                    >
+                        Cerrar Sesión
+                    </MenuItem>
+                ] : [
+                    <Link to="/register" key="register" className='flex items-center gap-2'>
+                        <MenuItem className='!text-sm !py-3 w-full'>
+                            Registrarse
+                        </MenuItem>
+                    </Link>,
+                    <Link to="/login" key="login" className='flex items-center gap-2'>
+                        <MenuItem className='!text-sm !py-3 w-full'>
+                            Inicia Sesión
+                        </MenuItem>
+                    </Link>
+                ]}
 
             </Menu>
         </div >

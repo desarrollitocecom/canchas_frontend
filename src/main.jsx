@@ -4,11 +4,22 @@ import './index.css'
 import AppRouter from './routers/AppRouter.jsx'
 import { Provider } from 'react-redux'
 import store from './redux/store/Store.js'
+import dayjs from 'dayjs';
+import 'dayjs/locale/es';
+import isoWeek from 'dayjs/plugin/isoWeek';
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+
+dayjs.locale('es'); // Configurar idioma español
+dayjs.extend(isoWeek); // Asegurar que la semana comience en lunes
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <AppRouter />
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='es'>
+        <AppRouter />
+      </LocalizationProvider>
     </Provider>
   </StrictMode>,
 )

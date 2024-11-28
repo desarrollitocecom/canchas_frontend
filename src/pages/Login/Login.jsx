@@ -3,10 +3,11 @@ import fondo_sjl_top from '../../assets/backgrounds/fondo_sjl_top.png';
 import fondo_sjl_bottom from '../../assets/backgrounds/fondo_sjl_bottom.png';
 import logo from '../../assets/logos/logo_sjl.png';
 import logo_claro from '../../assets/logos/sjl_logo_claro.png';
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import LoginForm from '../../components/auth/login/LoginForm';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
 const Login = () => {
   const { darkMode } = useSelector((state) => state.theme);
@@ -20,7 +21,14 @@ const Login = () => {
         style={{ backgroundImage: `url(${fondo_sjl_bottom})` }}>
       </div>
       <Container maxWidth="xs">
-        <div className='w-full sm:shadow-lg sm:border bg-transparent sm:bg-white dark:sm:bg-neutral-900 dark:border-neutral-700 rounded-lg p-6 mb-16 z-10'>
+        <div className='w-full sm:shadow-lg sm:border bg-transparent sm:bg-white dark:sm:bg-neutral-900 dark:border-neutral-800 rounded-lg p-6 mb-16 z-10'>
+          <div className="mb-4 text-xs">
+            <Link to="/" className='flex items-center gap-1 text-neutral-600 dark:text-neutral-300'>
+              <ArrowBackIosNewRoundedIcon className='!size-3' />
+              Volver
+            </Link>
+          </div>
+
           <div className='flex justify-center items-start mb-6'>
             {darkMode ? (
               <img

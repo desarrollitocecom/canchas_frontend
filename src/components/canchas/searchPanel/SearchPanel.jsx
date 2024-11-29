@@ -51,9 +51,8 @@ const SearchPanel = () => {
                 ${isActivePane ? 'h-40 items-end pb-5 shadow-sm' : 'h-20 items-center pointer-events-auto'}
                 `}>
                 <div
-                    className={`z-50 w-full min-w-max cursor-pointer relative shadow-md hover:shadow-neutral-300 dark:hover:shadow-black transition-all dark:shadow-black h-12 rounded-full flex items-center justify-center border dark:border-neutral-700
-                        ${isActivePane ? 'max-w-max h-16' : 'max-w-lg'} ${activeMenu ? 'bg-neutral-200 dark:bg-neutral-800' : 'bg-transparent'}
-                        `}
+                    className={`flex flex-1 z-50 w-full cursor-pointer relative shadow-md hover:shadow-neutral-300 dark:hover:shadow-black transition-all dark:shadow-black h-12 rounded-full items-center justify-center border dark:border-neutral-700
+                        ${isActivePane ? 'max-w-max h-16' : 'max-w-sm lg:max-w-xl'} ${activeMenu ? 'bg-neutral-200 dark:bg-neutral-800' : 'bg-transparent'}`}
                     onClick={() => setisActivePane(true)}
                 >
                     <MenuSearch

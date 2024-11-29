@@ -4,18 +4,18 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { StaticDatePicker, StaticTimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
-const MenuSearch = ({ 
-    children, 
-    type, 
-    id, 
-    label, 
-    placeholder, 
-    options, 
-    isOpen, 
+const MenuSearch = ({
+    children,
+    type,
+    id,
+    label,
+    placeholder,
+    options,
+    isOpen,
     isActivePane,
     setActiveMenu,
-    onOpen, 
-    onClose, 
+    onOpen,
+    onClose,
     onChange,
     icon
 }) => {
@@ -46,10 +46,7 @@ const MenuSearch = ({
         <>
             <div
                 ref={anchorElRef}
-                className={`flex items-center h-full rounded-full cursor-pointer relative overflow-hidden z-50
-                    ${isOpen ? '!bg-white dark:!bg-neutral-700' : ''}
-                    ${isActivePane ? 'min-w-52' : ''}
-                    `}
+                className={`flex flex-1 ${children ? 'min-w-36' : ''} items-center h-full rounded-full cursor-pointer relative overflow-hidden text-ellipsis z-50 ${isOpen ? '!bg-white dark:!bg-neutral-700' : ''} ${isActivePane ? 'min-w-52' : ''}`}
                 style={{
                     boxShadow: isOpen
                         ? darkMode
@@ -65,13 +62,19 @@ const MenuSearch = ({
                 aria-expanded={isOpen ? 'true' : undefined}
                 tabIndex="0"
             >
-                <div className="h-full w-full flex justify-between items-center relative min-w-32">
-                    <div className="flex flex-col px-8 py-[14px] text-ellipsis text-nowrap min-w-32">
+                <div className="h-full flex flex-1 justify-between items-center relative overflow-hidden text-ellipsis">
+                    <div className={`flex flex-col px-5 lg:px-8 py-[14px] overflow-hidden text-ellipsis text-nowrap `}>
                         <label htmlFor={id} className="text-xs font-[500]">{isActivePane ? label : ''}</label>
                         {SelectedOption ? (
-                            <p className="text-sm font-medium flex items-center gap-1">{!isActivePane && icon} {SelectedOption.label}</p>
+                            <div className="flex items-center gap-1 flex-nowrap">
+                                {!isActivePane && icon}
+                                <p className='text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap'>{SelectedOption.label}</p>
+                            </div>
+                        //     <p >
+                        //     {!isActivePane && icon} {SelectedOption.label}
+                        // </p>
                         ) : (
-                            <p className={`text-sm ${isOpen ? 'font-light' : 'font-medium text-xs'}`}>{placeholder}</p>
+                            <p className={`text-sm overflow-hidden text-ellipsis ${isOpen ? 'font-light' : 'font-medium text-xs'}`}>{placeholder}</p>
                         )}
                     </div>
                     {SelectedOption && isOpen && (
@@ -114,7 +117,7 @@ const MenuSearch = ({
                             <MenuItem
                                 key={option.value}
                                 onClick={() => {
-                                    
+
                                     handleSelectOption(option)
                                 }}
                                 className="!text-sm !py-3 gap-2 !bg-transparent hover:!bg-neutral-100 hover:dark:!bg-neutral-700"
@@ -193,4 +196,3 @@ const MenuSearch = ({
 
 export default MenuSearch;
 
-    

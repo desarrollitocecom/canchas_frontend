@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <>
       <header className='w-full flex flex-col items-center justify-center py-4 h-20'>
-        <div className='container px-3 flex justify-between'>
+        <div className='px-3 flex justify-between w-[95%] max-w-[1440px]'>
           <div className='flex items-start z-10'>
             <Link to="/" aria-label='Logo Sjl'>
               {darkMode ? (

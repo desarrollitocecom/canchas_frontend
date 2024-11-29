@@ -97,7 +97,7 @@ const SearchPanel = () => {
                         type="time"
                         id="horario"
                         label="Horario"
-                        placeholder={isActivePane ? 'Elije un horario' : 'En cualquier horario'}
+                        placeholder={isActivePane ? 'Elije un horario' : 'Horario'}
                         options={deportes}
                         isOpen={activeMenu === 'horario'}
                         isActivePane={isActivePane}

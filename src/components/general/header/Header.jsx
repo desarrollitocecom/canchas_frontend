@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import MenuUser from '../../users/menu/MenuUser';
 import { useSelector } from 'react-redux';
 import SearchPanel from '../../canchas/searchPanel/SearchPanel';
+import SearchPanelMobile from '../../canchas/searchPanel/SearchPanelMobile';
 
 const Header = () => {
   const { darkMode } = useSelector((state) => state.theme);
@@ -22,12 +23,17 @@ const Header = () => {
 
             </Link>
           </div>
-          <div className='flex items-start z-10'>
+          <div className='items-start z-10 hidden md:flex'>
             <MenuUser />
           </div>
         </div>
       </header>
-      <SearchPanel />
+      <div className='hidden md:block'>
+        <SearchPanel />
+      </div>
+      <div className='flex md:hidden'>
+        <SearchPanelMobile />
+      </div>
     </>
   )
 }

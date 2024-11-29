@@ -58,6 +58,7 @@ const MenuSearch = ({
                 role="button"
                 aria-label={label}
                 aria-controls={isOpen ? id : undefined}
+                aria-hidden={!isOpen}
                 aria-haspopup="true"
                 aria-expanded={isOpen ? 'true' : undefined}
                 tabIndex="0"

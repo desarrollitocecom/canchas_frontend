@@ -14,10 +14,10 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-cover bg-center relative min-h-[680px]">
-      <div className="flex absolute top-0 left-0 w-3/5 sm:w-2/5 md:w-80 lg:w-96 aspect-square bg-left-top bg-no-repeat bg-cover z-[1]"
+      <div className="flex absolute top-0 left-0 w-3/5 sm:w-2/5 md:w-80 lg:w-96 aspect-square bg-left-top bg-no-repeat bg-cover z-[-1]"
         style={{ backgroundImage: `url(${fondo_sjl_top})` }}>
       </div>
-      <div className="flex absolute bottom-0 right-0 w-3/5 sm:w-2/5 md:w-80 lg:w-96 aspect-square bg-right-bottom bg-no-repeat bg-cover z-[1]"
+      <div className="flex absolute bottom-0 right-0 w-3/5 sm:w-2/5 md:w-80 lg:w-96 aspect-square bg-right-bottom bg-no-repeat bg-cover z-[-1]"
         style={{ backgroundImage: `url(${fondo_sjl_bottom})` }}>
       </div>
       <Container maxWidth="xs">

@@ -23,7 +23,7 @@ const MenuUser = () => {
     const userImage = user?.foto || null;
 
     return (
-        <div className={`flex justify-between items-center border dark:border-neutral-800 h-[48px] w-[86px] rounded-full overflow-hidden hover:shadow-md transition-all duration-300 ${open && 'shadow-md'}`}>
+        <div className={`flex justify-between items-center border dark:border-neutral-700 h-[48px] w-[86px] rounded-full overflow-hidden hover:shadow-md transition-all duration-300 ${open && 'shadow-md'}`}>
             <Button
                 onClick={handleClick}
                 className='flex justify-between items-center gap-3 !px-2 !pl-[14px] w-full h-full hover:bg-transparent'

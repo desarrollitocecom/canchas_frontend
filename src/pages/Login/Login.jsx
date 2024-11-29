@@ -21,8 +21,8 @@ const Login = () => {
         style={{ backgroundImage: `url(${fondo_sjl_bottom})` }}>
       </div>
       <Container maxWidth="xs">
-        <div className='w-full sm:shadow-lg sm:border bg-transparent sm:bg-white dark:sm:bg-neutral-900 dark:border-neutral-800 rounded-lg p-6 mb-16 z-10'>
-          <div className="mb-4 text-xs">
+        <div className='w-full sm:shadow-lg sm:border bg-transparent sm:bg-white dark:sm:bg-neutral-900 dark:border-neutral-700 rounded-lg p-6 mb-16 z-10'>
+          <div className="mb-4 text-xs hidden sm:block">
             <Link to="/" className='flex items-center gap-1 text-neutral-600 dark:text-neutral-300'>
               <ArrowBackIosNewRoundedIcon className='!size-3' />
               Volver

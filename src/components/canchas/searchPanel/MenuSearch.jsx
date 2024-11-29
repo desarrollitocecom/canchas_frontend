@@ -1,93 +1,104 @@
 import { IconButton, Menu, MenuItem } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { StaticDatePicker, StaticTimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
-
-const MenuSearch = ({ children, type, id, label, placeholder, options, onActiveChange, onChange }) => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [SelectedOption, setSelectedOption] = useState(null)
+const MenuSearch = ({ 
+    children, 
+    type, 
+    id, 
+    label, 
+    placeholder, 
+    options, 
+    isOpen, 
+    isActivePane,
+    setActiveMenu,
+    onOpen, 
+    onClose, 
+    onChange,
+    icon
+}) => {
+    const [SelectedOption, setSelectedOption] = useState(null);
+    const anchorElRef = useRef(null)
     const { darkMode } = useSelector((state) => state.theme);
 
-    const isOpen = Boolean(anchorEl);
     const handleClick = (event) => {
-        onActiveChange(true)
-        setAnchorEl(event.currentTarget);
+        setTimeout(() => {
+            onOpen();
+        }, 100);
     };
+
     const handleClose = () => {
-        onActiveChange(false)
-        setAnchorEl(null);
+        onClose(); // Notifica al componente principal que este menú se cierra
     };
+
     const handleSelectOption = (option) => {
         setSelectedOption(option);
-        handleClose();
+        setActiveMenu(null);
     };
 
     useEffect(() => {
-        SelectedOption ? 
-            onChange(SelectedOption.value)
-            :
-            onChange(null)
-
-    }, [SelectedOption])
-    
+        SelectedOption ? onChange(SelectedOption.value) : onChange(null);
+    }, [SelectedOption]);
 
     return (
         <>
             <div
-                className={`flex items-center h-full rounded-full hover:dark:bg-neutral-800 cursor-pointer relative overflow-hidden min-w-32
-                    ${isOpen ? '!bg-white dark:!bg-neutral-700' : ''}`}
+                ref={anchorElRef}
+                className={`flex items-center h-full rounded-full cursor-pointer relative overflow-hidden z-50
+                    ${isOpen ? '!bg-white dark:!bg-neutral-700' : ''}
+                    ${isActivePane ? 'min-w-52' : ''}
+                    `}
                 style={{
-                    boxShadow: isOpen ? darkMode ?
-                        '0 3px 12px 0 rgb(0 0 0 / 1), 0 1px 2px 0 rgb(0 0 0 / 1)'
-                        :
-                        '0 3px 12px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.08)'
-                        :
-                        'none',
+                    boxShadow: isOpen
+                        ? darkMode
+                            ? '0 3px 12px 0 rgb(0 0 0 / 1), 0 1px 2px 0 rgb(0 0 0 / 1)'
+                            : '0 3px 12px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.08)'
+                        : 'none',
                 }}
                 onClick={handleClick}
-                role='button'
+                role="button"
                 aria-label={label}
-                aria-controls={open ? id : undefined}
+                aria-controls={isOpen ? id : undefined}
                 aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
+                aria-expanded={isOpen ? 'true' : undefined}
                 tabIndex="0"
             >
-                <div className='h-full w-full flex justify-between items-center relative min-w-32'>
-                    <div className='flex flex-col px-8 py-[14px] text-ellipsis text-nowrap min-w-32'>
-                        <label htmlFor={id} className='text-xs font-[500]'>{isOpen ? label : ''}</label>
-                        {SelectedOption ?
-                            <p className='text-sm font-medium'>{SelectedOption.label}</p>
-                            :
-                            <p className={`text-sm ${isOpen ? 'font-light' : 'font-medium'}`}>{placeholder}</p>
-                        }
+                <div className="h-full w-full flex justify-between items-center relative min-w-32">
+                    <div className="flex flex-col px-8 py-[14px] text-ellipsis text-nowrap min-w-32">
+                        <label htmlFor={id} className="text-xs font-[500]">{isActivePane ? label : ''}</label>
+                        {SelectedOption ? (
+                            <p className="text-sm font-medium flex items-center gap-1">{!isActivePane && icon} {SelectedOption.label}</p>
+                        ) : (
+                            <p className={`text-sm ${isOpen ? 'font-light' : 'font-medium text-xs'}`}>{placeholder}</p>
+                        )}
                     </div>
-                    {
-                        SelectedOption && isOpen && (
-                            <IconButton
-                                className='!absolute right-4 z-50'
-                                size='small'
-                                onClick={(e) => {
-                                    e.stopPropagation(); // Evita que el clic en el IconButton cierre el menú
-                                    handleSelectOption(null)   // Cierra el menú al hacer clic en el IconButton
-                                }}
-                            >
-                                <CloseRoundedIcon className='!size-4' />
-                            </IconButton>
-                        )
-                    }
+                    {SelectedOption && isOpen && (
+                        <IconButton
+                            className="!absolute right-3 z-50"
+                            size="small"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedOption(null);
+                            }}
+                        >
+                            <CloseRoundedIcon className="!size-4" />
+                        </IconButton>
+                    )}
                 </div>
                 {children}
-            </div >
+            </div>
             <Menu
-                anchorEl={anchorEl}
+                key={id}
+                anchorEl={anchorElRef.current} // Adjust if required
                 open={isOpen}
                 onClose={handleClose}
                 id={id}
                 transformOrigin={{ horizontal: 'center', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
                 className='!z-10'
+                disablePortal
                 sx={{
                     '& .MuiPaper-root': {
                         minWidth: 250,
@@ -103,6 +114,7 @@ const MenuSearch = ({ children, type, id, label, placeholder, options, onActiveC
                             <MenuItem
                                 key={option.value}
                                 onClick={() => {
+                                    
                                     handleSelectOption(option)
                                 }}
                                 className="!text-sm !py-3 gap-2 !bg-transparent hover:!bg-neutral-100 hover:dark:!bg-neutral-700"
@@ -175,9 +187,10 @@ const MenuSearch = ({ children, type, id, label, placeholder, options, onActiveC
                             ) : null
                 }
             </Menu>
-
         </>
-    )
-}
+    );
+};
 
-export default MenuSearch
+export default MenuSearch;
+
+    

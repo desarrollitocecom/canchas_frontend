@@ -8,6 +8,7 @@ import Home from '../pages/Home/Home'
 import Layout from '../pages/Layout'
 import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material'
 import { setDarkMode } from '../redux/slices/ThemeSlice'
+import Register from '../pages/Register/Register'
 
 const AppRouter = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -20,6 +21,10 @@ const AppRouter = () => {
         {
           path: '/login',
           element: <PublicRouter element={<Login />} />,
+        },
+        {
+          path: "/register",
+          element: <PublicRouter element={<Register />} />
         },
         {
           path: '/',

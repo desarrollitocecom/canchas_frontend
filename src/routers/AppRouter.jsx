@@ -23,6 +23,10 @@ const AppRouter = () => {
           element: <PublicRouter element={<Login />} />,
         },
         {
+          path: "/register",
+          element: <PublicRouter element={<Register />} />
+        },
+        {
           path: '/',
           element: <Layout />,
           children: [
@@ -31,10 +35,6 @@ const AppRouter = () => {
               element: <Home />,
             },
           ],
-        },
-        {
-          path: "/register",
-          element: <PublicRouter element={<Register />} />
         },
       ]),
     []

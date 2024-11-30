@@ -1,0 +1,11 @@
+# robots.txt for React app
+
+User-agent: *
+Disallow: /admin/
+
+Disallow: /some-dynamic-route/
+
+Allow: /static/
+Allow: /favicon.ico
+Allow: /assets/
+

@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 const Register = () => {
     const { darkMode } = useSelector((state) => state.theme)
-    
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-cover bg-center relative">
             {/* Fondo superior */}
@@ -25,8 +25,8 @@ const Register = () => {
                 style={{ backgroundImage: `url(${fondo_sjl_bottom})` }}
             ></div>
 
-            <Container maxWidth="sm" className="w-full">
-                <div className="w-full flex flex-col items-center sm:shadow-lg sm:border bg-white dark:bg-neutral-900 dark:border-neutral-700 rounded-lg p-4 sm:p-6 mb-16 z-10">
+            <Container maxWidth="sm">
+                <div className="w-full flex flex-row items-center sm:shadow-lg sm:border bg-transparent sm:bg-white dark:sm:bg-neutral-900 dark:border-neutral-700 rounded-lg p-6 mb-16 z-10">
                     {/* Formulario */}
                     <div className="flex flex-col w-full max-w-sm mx-auto">
                         <div className="flex justify-center items-start mb-6">

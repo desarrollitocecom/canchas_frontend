@@ -1,53 +1,61 @@
-import React from 'react';
-import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useFormik } from 'formik';
+import React from "react";
+import { TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { Link } from "react-router-dom";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { useFormik } from "formik";
+import { validatePassword, validateConfirmPassword } from "../register/passwordValidation";
 
 const RegisterForm = () => {
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      dni: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      dni: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
       termsAccepted: false,
     },
     validate: (values) => {
       const errors = {};
       if (!values.firstName) {
-        errors.firstName = 'El nombre es requerido';
+        errors.firstName = "El nombre es requerido";
       }
       if (!values.lastName) {
-        errors.lastName = 'Los apellidos son requeridos';
+        errors.lastName = "Los apellidos son requeridos";
       }
       if (!values.email) {
-        errors.email = 'El correo electrónico es requerido';
+        errors.email = "El correo electrónico es requerido";
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
       ) {
-        errors.email = 'Correo electrónico inválido';
+        errors.email = "Correo electrónico inválido";
       }
       if (!values.dni) {
-        errors.dni = 'El DNI es requerido';
+        errors.dni = "El DNI es requerido";
       }
       if (!values.phone) {
-        errors.phone = 'El número de celular es requerido';
+        errors.phone = "El número de teléfono es requerido";
+      } else if (values.phone.replace(/\s/g, "").length < 11) {
+        errors.phone = "Número de teléfono inválido";
       }
-      if (!values.password) {
-        errors.password = 'La contraseña es requerida';
-      } else if (values.password.length < 6) {
-        errors.password = 'La contraseña debe tener al menos 6 caracteres';
+      // Validación de contraseña
+      const passwordError = validatePassword(values.password);
+      if (passwordError) {
+        errors.password = passwordError;
       }
-      if (!values.confirmPassword) {
-        errors.confirmPassword = 'Debes confirmar la contraseña';
-      } else if (values.confirmPassword !== values.password) {
-        errors.confirmPassword = 'Las contraseñas no coinciden';
+      // Validación de confirmación de contraseña
+      const confirmPasswordError = validateConfirmPassword(
+        values.password,
+        values.confirmPassword
+      );
+      if (confirmPasswordError) {
+        errors.confirmPassword = confirmPasswordError;
       }
       if (!values.termsAccepted) {
-        errors.termsAccepted = 'Debes aceptar los términos y condiciones';
+        errors.termsAccepted = "Debes aceptar los términos y condiciones";
       }
       return errors;
     },
@@ -115,19 +123,57 @@ const RegisterForm = () => {
             error={formik.touched.dni && Boolean(formik.errors.dni)}
             helperText={formik.touched.dni && formik.errors.dni}
           />
-          <TextField
-            label="Celular"
-            type="tel"
-            variant="outlined"
-            fullWidth
-            size="small"
-            name="phone"
-            value={formik.values.phone}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.phone && Boolean(formik.errors.phone)}
-            helperText={formik.touched.phone && formik.errors.phone}
-          />
+          {/* Campo de teléfono */}
+          <div className="flex flex-col gap-1">
+            <PhoneInput
+              country={"pe"}
+              value={formik.values.phone}
+              onChange={(phone) => formik.setFieldValue("phone", phone)}
+              inputStyle={{
+                width: "100%",
+                border: formik.touched.phone && formik.errors.phone
+                  ? "1px solid #d32f2f" // Rojo para errores
+                  : window.matchMedia("(prefers-color-scheme: dark)").matches // Detecta si está en modo oscuro
+                    ? "1px solid rgba(255, 255, 255, 0.23)" // Gris tenue para modo oscuro
+                    : "1px solid rgba(0, 0, 0, 0.23)", // Gris tenue para modo claro
+                borderRadius: "4px",
+                height: "40px",
+                backgroundColor: "var(--tw-bg-opacity)",
+                color: "var(--tw-text-opacity)",
+                fontSize: "14px",
+                paddingLeft: "48px",
+                paddingRight: "8px",
+                transition: "border-color 0.3s",
+              }}
+              containerStyle={{ width: "100%" }}
+              buttonStyle={{
+                border: "none",
+                backgroundColor: "transparent",
+                padding: "0",
+                margin: "0",
+                width: "40px", // Asegura un ancho adecuado para la bandera
+              }}
+              dropdownStyle={{
+                zIndex: 100,
+                backgroundColor: 'white',
+                color: 'black',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                overflowY: 'scroll',
+              }}
+              inputClass={`${formik.touched.phone && formik.errors.phone ? "animate-shake" : ""
+                } dark:bg-gray-800 dark:border-gray-500 dark:text-white`}
+              placeholder="Número de teléfono"
+            />
+            {formik.touched.phone && formik.errors.phone && (
+              <p className="text-sm mt-1" style={{ color: "#d32f2f" }}> {/* Color de error de Material UI */}
+                {formik.errors.phone}
+              </p>
+            )}
+          </div>
+
           <TextField
             label="Contraseña"
             type="password"
@@ -172,11 +218,8 @@ const RegisterForm = () => {
           }
           label={
             <span className="text-xs">
-              Acepto los{' '}
-              <Link
-                to="/terms"
-                className="font-semibold hover:underline"
-              >
+              Acepto los{" "}
+              <Link to="/terms" className="font-semibold hover:underline">
                 Términos y Condiciones
               </Link>
             </span>

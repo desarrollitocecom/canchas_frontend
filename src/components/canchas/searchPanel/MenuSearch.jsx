@@ -64,16 +64,13 @@ const MenuSearch = ({
                 tabIndex="0"
             >
                 <div className="h-full flex flex-1 justify-between items-center relative overflow-hidden text-ellipsis">
-                    <div className={`flex flex-col px-5 lg:px-8 py-[14px] overflow-hidden text-ellipsis text-nowrap `}>
-                        <label htmlFor={id} className="text-xs font-[500]">{isActivePane ? label : ''}</label>
+                    <div className={`flex flex-col px-5 lg:px-8 py-[14px] overflow-hidden text-ellipsis text-nowrap cursor-pointer`}>
+                        <label htmlFor={id} className="text-xs font-[500] cursor-pointer">{isActivePane ? label : ''}</label>
                         {SelectedOption ? (
                             <div className="flex items-center gap-1 flex-nowrap">
                                 {!isActivePane && icon}
                                 <p className='text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap'>{SelectedOption.label}</p>
                             </div>
-                        //     <p >
-                        //     {!isActivePane && icon} {SelectedOption.label}
-                        // </p>
                         ) : (
                             <p className={`text-sm overflow-hidden text-ellipsis ${isOpen ? 'font-light' : 'font-medium text-xs'}`}>{placeholder}</p>
                         )}

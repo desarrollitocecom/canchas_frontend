@@ -11,24 +11,24 @@ const Home = () => {
 
   return (
     <>
-      <div className='hidden md:block'>
+      <div className='hidden md:block z-[2]'>
         <SearchPanel />
       </div>
-      <div className='flex md:hidden'>
+      <div className='flex md:hidden z-[2]'>
         <SearchPanelMobile />
       </div>
       <main className={`h-full flex justify-center relative`}>
-        <div className={`absolute h-full md:relative md:flex-1 w-full bg-neutral-50 dark:bg-neutral-950  transition-all ${MapView ? 'opacity-0 z-0' : 'z-10'}`}>
+        <div className={`absolute h-full md:relative md:flex-1 w-full bg-neutral-50 dark:bg-neutral-950 transition-all ${MapView ? 'opacity-0 md:opacity-100 z-0' : 'z-[1]'}`}>
           lista
         </div>
-        <div className={`absolute h-full md:relative md:flex-1 w-full max-w-[800px] bg-neutral-50 dark:bg-neutral-950 transition-all ${!MapView ? 'opacity-0 z-0' : 'z-10'}`}>
+        <div className={`absolute h-full md:relative md:flex-1 w-full max-w-[800px] bg-neutral-50 dark:bg-neutral-950 transition-all ${!MapView ? 'opacity-0 md:opacity-100 z-0' : 'z-[1]'}`}>
           <Mapa />
         </div>
         <Button
-          className={`!absolute md:!hidden bottom-5 z-10 !capitalize !px-4 !py-2 ${MapView ? 'dark:!bg-neutral-700 dark:!text-white' : 'dark:!bg-neutral-300 dark:!text-neutral-900'}  !text-white !rounded-full !shadow-lg`}
+          className={`!absolute md:!hidden bottom-5 z-[1] !capitalize h-10 w-24  !bg-neutral-700 !text-white ${MapView ? 'dark:!bg-neutral-700 dark:!text-white' : 'dark:!bg-neutral-300 dark:!text-neutral-900'}  !text-white !rounded-full !shadow-lg`}
           onClick={() => setMapView((prev) => !prev)}
         >
-          {MapView ? (
+          {!MapView ? (
             <span className='flex items-center gap-1 font-semibold'><MapRoundedIcon className='!size-5' />  Mapa</span>
           ) : (
             <span className='flex items-center gap-1 font-semibold'><FormatListBulletedRoundedIcon className='!size-5' />  Lista</span>

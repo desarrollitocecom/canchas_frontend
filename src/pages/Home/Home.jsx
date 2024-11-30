@@ -22,7 +22,9 @@ const Home = () => {
           lista
         </div>
         <div className={`absolute h-full md:relative md:flex-1 w-full max-w-[800px] bg-neutral-50 dark:bg-neutral-950 transition-all ${!MapView ? 'opacity-0 md:opacity-100 z-0' : 'z-[1]'}`}>
-          <Mapa />
+          <Mapa>
+            
+          </Mapa>
         </div>
         <Button
           className={`!absolute md:!hidden bottom-5 z-[1] !capitalize h-10 w-24  !bg-neutral-700 !text-white ${MapView ? 'dark:!bg-neutral-700 dark:!text-white' : 'dark:!bg-neutral-300 dark:!text-neutral-900'}  !text-white !rounded-full !shadow-lg`}

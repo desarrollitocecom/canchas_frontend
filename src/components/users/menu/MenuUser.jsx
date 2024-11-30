@@ -23,18 +23,19 @@ const MenuUser = () => {
     const userImage = user?.foto || null;
 
     return (
-        <div className={`flex justify-between items-center border h-[48px] w-[86px] rounded-full overflow-hidden hover:shadow-md transition-all duration-300 ${open && 'shadow-md'}`}>
+        <div className={`flex justify-between items-center border dark:border-neutral-700 h-[48px] w-[86px] rounded-full overflow-hidden hover:shadow-md transition-all duration-300 ${open && 'shadow-md'}`}>
             <Button
                 onClick={handleClick}
                 className='flex justify-between items-center gap-3 !px-2 !pl-[14px] w-full h-full hover:bg-transparent'
                 color='inherit'
+                aria-label='account of current user'
                 aria-controls={'account-menu'}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : 'false'}
             >
-                <MenuRoundedIcon className='!text-neutral-500 !size-5' />
+                <MenuRoundedIcon className='!text-neutral-500 dark:!text-neutral-100 !size-5' />
                 <Avatar
-                    className=' !bg-neutral-500'
+                    className=' !bg-neutral-500 dark:!bg-neutral-200'
                     alt={userName}
                     sx={{
                         width: 30, height: 30, fontSize: 16,

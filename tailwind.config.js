@@ -9,7 +9,9 @@ export default {
     extend: {
       animation: {
         scaleUpDown: 'scaleUpDown .8s ease-in infinite',
-        shake: 'shake 0.3s ease-in-out'
+        shake: 'shake 0.3s ease-in-out',
+        fadeDown: 'fadeDown 0.3s ease-out',
+        fadeUp: 'fadeUp 0.3s ease-out',
       },
       keyframes: {
         scaleUpDown: {
@@ -21,7 +23,27 @@ export default {
           '25%': { transform: 'translateX(-4px) rotate(-1deg)' },
           '50%': { transform: 'translateX(4px) rotate(1deg)' },
           '75%': { transform: 'translateX(-4px) rotate(-1deg)' }
-        }
+        },
+        fadeDown: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(-50px)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0)',
+          },
+        },
+        fadeUp: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(50px)',  // Empieza desde abajo
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0)',     // Llega a su posición original
+          },
+        },
       },
       screens: {
         'md': '769px',

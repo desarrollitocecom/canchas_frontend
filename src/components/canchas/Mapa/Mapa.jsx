@@ -27,8 +27,8 @@ const Mapa = ({
             className="select-none"
         >
             <TileLayer
-                url="https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"
-                subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
             <MapUpdater position={position} zoom={zoom} />
             {children}

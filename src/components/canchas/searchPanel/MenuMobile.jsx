@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import React, { useState } from 'react';
 
 const MenuMobile = ({ value, label, labelExpanded, isOpen, onOpen, children }) => {

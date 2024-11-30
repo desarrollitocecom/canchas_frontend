@@ -1,11 +1,18 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import Header from '../components/general/header/Header'
+import Navbar from '../components/general/NavBar/Navbar'
 
-const Layout = ({children}) => {
+
+const Layout = () => {
+
   return (
-    <div>
+    <div className='flex flex-col h-full'>
       <Header />
-      {children}
+      <div className='flex flex-1 flex-col'>
+        <Outlet />
+      </div>
+      <Navbar />
     </div>
   )
 }

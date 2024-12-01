@@ -46,7 +46,7 @@ const SearchPanel = () => {
     };
 
     return (
-        <div className={`w-full h-full flex flex-col ${isActivePane ? 'fixed top-0 left-0' : 'absolute top-0 left-0 pointer-events-none'}`}>
+        <div className={`w-full h-full flex flex-col ${isActivePane ? 'fixed top-0 left-0' : 'absolute top-0 left-0 pointer-events-none'} z-[2]`}>
             <div className={`bg-white dark:bg-neutral-950 border-b dark:border-neutral-700 w-full flex justify-center transition-all
                 ${isActivePane ? 'h-40 items-end pb-5 shadow-sm' : 'h-20 items-center pointer-events-auto'}
                 `}>
@@ -67,6 +67,7 @@ const SearchPanel = () => {
                         onOpen={() => setActiveMenu((prev) => (prev === 'deporte' ? null : 'deporte'))}
                         onClose={onClose}
                         onChange={(e) => {
+                            setActiveMenu('fecha');
                             dispatch(setDeporte(e));
                         }}
                         icon={<SportsScoreRoundedIcon className='text-neutral-500 !size-4'/>}
@@ -86,6 +87,7 @@ const SearchPanel = () => {
                         onOpen={() => setActiveMenu((prev) => (prev === 'fecha' ? null : 'fecha'))}
                         onClose={onClose}
                         onChange={(e) => {
+                            setActiveMenu('horario');
                             dispatch(setFecha(e));
                         }}
                         icon={<DateRangeRoundedIcon className='text-neutral-500 !size-4'/>}
@@ -133,7 +135,7 @@ const SearchPanel = () => {
                 </div>
             </div>
             <div
-                className={`w-full flex-1 transition-all opacity-10 ${isActivePane ? 'bg-black' : 'bg-transparent'}`}
+                className={`w-full flex-1 transition-all opacity-50 ${isActivePane ? 'bg-black' : 'bg-transparent'}`}
                 onClick={() => setisActivePane(false)}
             ></div>
         </div>

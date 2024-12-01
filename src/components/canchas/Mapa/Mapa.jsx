@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const MapUpdater = ({ position, zoom }) => {
@@ -25,11 +25,13 @@ const Mapa = ({
             zoom={zoom}
             style={{ height: '100%', width: '100%' }}
             className="select-none"
+            zoomControl={false}
         >
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
+            <ZoomControl position="topright" />
             <MapUpdater position={position} zoom={zoom} />
             {children}
         </MapContainer>

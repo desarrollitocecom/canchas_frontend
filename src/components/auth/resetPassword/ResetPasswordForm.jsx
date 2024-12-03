@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import { Link } from 'react-router-dom';
+
 
 const ResetPasswordForm = () => {
     const formik = useFormik({
@@ -47,6 +49,8 @@ const ResetPasswordForm = () => {
                 }}
             />
         </div>
+        <Link to="/otp-verification">
+
         <Button
             fullWidth
             className='!capitalize'
@@ -55,9 +59,10 @@ const ResetPasswordForm = () => {
             type="submit"
             // disabled={isSubmitting}
             sx={{ mt: 1 }}
-        >
-            Iniciar sesión
+            >
+            Enviar
         </Button>
+            </Link>
     </form>
     );
 };

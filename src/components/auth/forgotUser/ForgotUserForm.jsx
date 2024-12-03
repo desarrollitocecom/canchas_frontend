@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
 import { useFormik } from 'formik';
+import { Navigate } from 'react-router-dom';
 
 const ForgotUserForm = () => {
     const formik = useFormik({

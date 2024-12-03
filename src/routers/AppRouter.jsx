@@ -9,6 +9,11 @@ import Layout from '../pages/Layout'
 import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material'
 import { setDarkMode } from '../redux/slices/ThemeSlice'
 import Register from '../pages/Register/Register'
+import ResetPassword from '../pages/ResetPassword/ResetPassword'
+import OtpVerificacion from '../pages/ResetPassword/OtpVerificacion'
+import ChangePassword from '../pages/ChangePassword/ChangePassword'
+import Info from '../pages/info/Info.jsx'
+import ForgotUser from '../pages/ForgotUser/ForgotUser.jsx'
 
 const AppRouter = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -25,6 +30,26 @@ const AppRouter = () => {
         {
           path: "/register",
           element: <PublicRouter element={<Register />} />
+        },
+        {
+          path: "/forgot-password",
+          element: <PublicRouter element={<ResetPassword />} />
+        },
+        {
+          path: "/otp-verification",
+          element: <PublicRouter element={<OtpVerificacion />} />
+        },
+        {
+          path: "/change-password",
+          element: <PublicRouter element={<ChangePassword />} />
+        },
+        {
+          path: "/forgot-user",
+          element: <PublicRouter element={<ForgotUser />} />
+        },
+        {
+          path: "/info",
+          element: <PublicRouter element={<Info />} />
         },
         {
           path: '/',

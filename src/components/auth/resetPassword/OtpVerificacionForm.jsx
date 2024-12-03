@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useFormik } from 'formik';
+import { Link } from 'react-router-dom';
 
 const OtpForm = () => {
 
@@ -96,14 +97,17 @@ const OtpForm = () => {
 
 
             <div className="flex gap-4 justify-center">
+            <Link to="/change-password">
+
                 <Button
                     type="submit"
                     variant="contained"
                     color="primary"
                     className="!capitalize"
-                >
+                    >
                     Verificar
                 </Button>
+                    </Link>
                 <Button
                     type="button"
                     variant="contained"

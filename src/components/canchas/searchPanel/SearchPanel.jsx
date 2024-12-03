@@ -19,7 +19,7 @@ const SearchPanel = () => {
     const dispatch = useDispatch();
     const { addParams } = UseUrlParamsManager();
     const { deporte, fecha, time } = useSelector((state) => state.filters);
-
+    
     const deportes = [
         { value: 'futbol', icon: SportsSoccerIcon, label: 'Futbol' },
         { value: 'voley', icon: SportsVolleyballIcon, label: 'Voley' },
@@ -67,7 +67,7 @@ const SearchPanel = () => {
                         onOpen={() => setActiveMenu((prev) => (prev === 'deporte' ? null : 'deporte'))}
                         onClose={onClose}
                         onChange={(e) => {
-                            setActiveMenu('fecha');
+                            if (e) setActiveMenu('fecha');
                             dispatch(setDeporte(e));
                         }}
                         icon={<SportsScoreRoundedIcon className='text-neutral-500 !size-4'/>}
@@ -87,7 +87,7 @@ const SearchPanel = () => {
                         onOpen={() => setActiveMenu((prev) => (prev === 'fecha' ? null : 'fecha'))}
                         onClose={onClose}
                         onChange={(e) => {
-                            setActiveMenu('horario');
+                            if (e) setActiveMenu('horario');
                             dispatch(setFecha(e));
                         }}
                         icon={<DateRangeRoundedIcon className='text-neutral-500 !size-4'/>}

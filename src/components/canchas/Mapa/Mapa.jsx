@@ -2,18 +2,6 @@ import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const MapUpdater = ({ position, zoom }) => {
-    const map = useMap();
-
-    useEffect(() => {
-        if (map) {
-            map.flyTo(position, zoom);
-        }
-    }, [position, zoom, map]);
-
-    return null;
-};
-
 const Mapa = ({
     position = [-11.989988, -77.007206],
     zoom = 13,
@@ -32,7 +20,7 @@ const Mapa = ({
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
             <ZoomControl position="topright" />
-            <MapUpdater position={position} zoom={zoom} />
+            
             {children}
         </MapContainer>
     );

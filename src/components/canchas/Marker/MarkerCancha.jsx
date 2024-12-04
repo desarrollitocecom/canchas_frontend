@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import iconUrl from '../../../assets/icons/marker-cancha.webp'
+import StarIcon from '@mui/icons-material/Star';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import SportsVolleyballIcon from '@mui/icons-material/SportsVolleyball';
+import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 
 const MarkerCancha = ({ data }) => {
     const map = useMap();
@@ -25,19 +29,63 @@ const MarkerCancha = ({ data }) => {
 
     return (
         <>
-            {data?.map((cancha, index) => (
-                <Marker
-                    key={index}
-                    position={cancha.geolocalizacion}
-                    icon={customIcon}
-                >
-                    <Popup>
-                        <div className='shadow-lg bg-white'>
-                            asdasd
-                        </div>
-                    </Popup>
-                </Marker>
-            ))}
+            {data?.map((cancha, index) => {
+                const renderedIcons = new Set();
+
+                return (
+                    <Marker
+                        key={index}
+                        position={cancha.geolocalizacion}
+                        icon={customIcon}
+                    >
+                        <Popup
+                            className='canchas-popup'
+                        >
+                            <div className='cursor-pointer'>
+                                <div className='w-80 h-auto max-w-full aspect-[5/3] bg-black'>
+                                    <img
+                                        className='h-full w-full object-cover'
+                                        src={cancha.imagenes[0]}
+                                        alt={"imagen" + cancha.nombreCentro}
+                                    />
+                                </div>
+                                <div className="py-3 px-4 dark:text-white flex flex-col gap-[2px]">
+                                    <div className='flex items-center justify-between text-[15px]'>
+                                        <h2 className="font-semibold text-nowrap truncate max-w-full">Campo deportivo {cancha.nombreCentro}</h2>
+                                        <span className='flex items-center gap-1 font-normal'>
+                                            <StarIcon className='!size-4' />
+                                            {parseFloat(cancha.rating).toFixed(2)}
+                                        </span>
+                                    </div>
+                                    <div className='flex items-center gap-1 text-neutral-500 dark:text-neutral-300'>
+                                        {cancha.instalaciones.losaCementoMultiuso === 1 && (
+                                            <>
+                                                {!renderedIcons.has('soccer') && renderedIcons.add('soccer') && (
+                                                    <SportsSoccerIcon className='!size-5' />
+                                                )}
+                                                {!renderedIcons.has('volleyball') && renderedIcons.add('volleyball') && (
+                                                    <SportsVolleyballIcon className='!size-5' />
+                                                )}
+                                                {!renderedIcons.has('basketball') && renderedIcons.add('basketball') && (
+                                                    <SportsBasketballIcon className='!size-5' />
+                                                )}
+                                            </>
+                                        )}
+                                        {cancha.instalaciones.campoGrassArtificial === 1 &&
+                                            !renderedIcons.has('soccer') && renderedIcons.add('soccer') && (
+                                                <SportsSoccerIcon className='!size-5' />
+                                            )}
+                                        {cancha.instalaciones.campoGrasNatural === 1 &&
+                                            !renderedIcons.has('soccer') && renderedIcons.add('soccer') && (
+                                                <SportsSoccerIcon className='!size-5' />
+                                            )}
+                                    </div>
+                                </div>
+                            </div>
+                        </Popup>
+                    </Marker>
+                )
+            })}
         </>
     );
 };

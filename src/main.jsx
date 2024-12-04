@@ -9,6 +9,7 @@ import 'dayjs/locale/es';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'swiper/css';
 
 
 dayjs.locale('es'); // Configurar idioma español

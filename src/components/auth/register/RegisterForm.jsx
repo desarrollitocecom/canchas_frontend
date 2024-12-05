@@ -6,6 +6,7 @@ import "react-phone-input-2/lib/style.css";
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import InputPassword from '../../general/InputPassword';
 import { useFormik } from "formik";
+import { FormHelperText } from "@mui/material";
 import { validatePassword, validateConfirmPassword } from "../register/passwordValidation";
 
 const RegisterForm = () => {
@@ -23,23 +24,23 @@ const RegisterForm = () => {
     validate: (values) => {
       const errors = {};
       if (!values.firstName) {
-        errors.firstName = "El nombre es requerido";
+        errors.firstName = "nombre requerido";
       }
       if (!values.lastName) {
-        errors.lastName = "Los apellidos son requeridos";
+        errors.lastName = "apellidos requeridos";
       }
       if (!values.email) {
-        errors.email = "El correo electrónico es requerido";
+        errors.email = "correo electrónico requerido";
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
       ) {
         errors.email = "Correo electrónico inválido";
       }
       if (!values.dni) {
-        errors.dni = "El DNI es requerido";
+        errors.dni = "DNI requerido";
       }
       if (!values.phone) {
-        errors.phone = "El número de teléfono es requerido";
+        errors.phone = "celular requerido";
       } else if (values.phone.replace(/\s/g, "").length < 11) {
         errors.phone = "Número de teléfono inválido";
       }
@@ -74,7 +75,7 @@ const RegisterForm = () => {
       </h1>
 
       <form className="space-y-4 w-full" onSubmit={formik.handleSubmit}>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-5">
           <TextField
             label="Nombre"
             variant="outlined"
@@ -183,9 +184,9 @@ const RegisterForm = () => {
               placeholder="Número de teléfono"
             />
             {formik.touched.phone && formik.errors.phone && (
-              <p className="text-sm mt-1" style={{ color: "#d32f2f" }}> {/* Color de error de Material UI */}
+              <FormHelperText style={{ color: "#d32f2f", marginTop: "2px" }}>
                 {formik.errors.phone}
-              </p>
+              </FormHelperText>
             )}
           </div>
           <InputPassword

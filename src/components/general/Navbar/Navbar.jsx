@@ -26,8 +26,8 @@ const Navbar = () => {
             sx={{
                 height: '65px',
                 '& .Mui-selected': {
-                    color: '#1C943E !important'
-                }
+                    color: (theme) => theme.palette.mode === 'dark' ? '#30c75b !important' : '#1C943E !important',
+                },
             }}
         >
             <BottomNavigationAction

@@ -2,6 +2,188 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root{
+html,
+body,
+#root {
     height: 100%;
+}
+
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.leaflet-control-zoom-in {
+    height: 40px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px 10px 0px 0px !important;
+    font-size: 28px !important;
+
+}
+
+.leaflet-control-zoom-out {
+    height: 40px !important;
+    width: 40px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 0px 0px 10px 10px !important;
+    font-size: 28px !important;
+}
+
+/* Estilizar el scrollbar de todos los divs */
+div::-webkit-scrollbar {
+    width: 13px;
+}
+
+div::-webkit-scrollbar-track {
+    background-color: var(--scroll-track, transparent);
+    border-radius: var(--scroll-track-radius, var(--scroll-radius));
+}
+
+div::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-thumb-color, rgb(206, 206, 206));
+    background-image: var(--scroll-thumb, none);
+    border-radius: 3px;
+}
+
+
+
+
+/* Canchas popup */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    box-shadow: 0 7px 18px rgba(0, 0, 0, .4) !important;
+}
+.canchas-popup .leaflet-popup-tip-container{
+    display: none;
+}
+.canchas-popup .leaflet-popup-content{
+    margin: 0px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.canchas-popup .leaflet-popup-content-wrapper{
+    padding: 0px;
+}
+.canchas-popup .leaflet-popup-close-button{
+    background-color: #fff !important;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 20px !important;
+    margin-top: 12px;
+    margin-right: 12px;
+    z-index: 1;
+}
+.canchas-popup .leaflet-popup-close-button span{
+    margin-bottom: 2px;
+}
+
+
+/* swiper css */
+.swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+    background-color: rgba(255, 255, 255, 0.5) !important; 
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
+    opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #fff !important; 
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: #e2e2e2 !important;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6);
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50%;
+    font-weight: 900 !important;
+    color: #757575 !important;
+    opacity: 0 !important;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none !important;
+}
+.mapa .swiper-button-next,
+.mapa .swiper-button-prev {
+    margin-top: -5px !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: #ffffff !important;
+    scale: 1.1;
+}
+
+.swiper-button-next::after{
+    margin-top: 2px !important;
+    margin-left: 2px !important;
+}
+.swiper-button-prev::after {
+    margin-top: 2px !important;
+    margin-right: 2px !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+.card-canchas:hover .swiper-button-next,
+.card-canchas:hover .swiper-button-prev {
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+.card-canchas:hover .swiper-button-disabled{
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .invert-map {
+        filter: brightness(0.6) invert(1) contrast(3) hue-rotate(360deg) saturate(0.3) brightness(0.7);
+    }
+
+    .leaflet-control-zoom-in {
+        filter: invert(1) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, .7) !important;
+
+    }
+
+    .leaflet-control-zoom-out {
+        filter: invert(1) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+
+    div::-webkit-scrollbar-thumb {
+        background-color: var(--scroll-thumb-color, rgb(100, 100, 100));
+        background-image: var(--scroll-thumb, none);
+        border-radius: 3px;
+    }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+        box-shadow: 0 7px 18px rgba(0, 0, 0, .7) !important;
+    }
+
+    .canchas-popup .leaflet-popup-content-wrapper{
+        background-color: #000000 !important;
+    }
+    .canchas-popup .leaflet-popup-close-button{
+        background-color: #000000 !important;
+        color: #fff !important;
+    }
 }

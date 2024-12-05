@@ -5,10 +5,14 @@ import Login from '../pages/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/general/loader/Loader'
 import Home from '../pages/Home/Home'
-import Layout from '../pages/Layout'
 import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material'
 import { setDarkMode } from '../redux/slices/ThemeSlice'
 import Register from '../pages/Register/Register'
+import ReservaLayout from '../components/layouts/ReservaLayout'
+import Layout from '../components/layouts/Layout'
+import InformacionUsuario from '../pages/Reserva/Informacion/InformacionUsuario'
+import Horarios from '../pages/Reserva/Horarios/Horarios'
+import Pago from '../pages/Reserva/Pago/Pago'
 
 const AppRouter = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -33,6 +37,15 @@ const AppRouter = () => {
             {
               path: '/',
               element: <Home />,
+            },
+            {
+              path: '/reserva/:id',
+              element: <ReservaLayout />,
+              children: [
+                { path: '', element: <InformacionUsuario /> },
+                { path: 'horarios', element: <Horarios /> },
+                { path: 'pago', element: <Pago /> },
+              ],
             },
           ],
         },

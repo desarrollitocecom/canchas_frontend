@@ -48,7 +48,7 @@ const SearchPanelMobile = () => {
 
     return (
         <div className={`w-full h-full flex flex-col ${isActivePane ? 'fixed top-0 left-0  z-50' : 'absolute top-0 left-0 pointer-events-none'}`}>
-            <div className={`bg-white dark:bg-neutral-950 border-b dark:border-neutral-700 w-full flex justify-center transition-all h-20 items-center`}>
+            <div className={`bg-white dark:bg-neutral-950 border-b dark:border-neutral-700 w-full flex justify-center transition-all h-20 items-center shadow-md dark:shadow-neutral-900`}>
                 <div className='w-full max-w-[90%] flex justify-end'>
                     <div
                         className={`flex flex-1 z-50 px-4 w-full overflow-hidden max-w-full items-center justify-start cursor-pointer pointer-events-auto relative shadow-md hover:shadow-neutral-300 dark:hover:shadow-black transition-all dark:shadow-black rounded-full border dark:border-neutral-700 h-14`}

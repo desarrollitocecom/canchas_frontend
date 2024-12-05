@@ -6,6 +6,8 @@ import StarIcon from '@mui/icons-material/Star';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import SportsVolleyballIcon from '@mui/icons-material/SportsVolleyball';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
 
 const MarkerCancha = ({ data }) => {
     const map = useMap();
@@ -41,13 +43,26 @@ const MarkerCancha = ({ data }) => {
                         <Popup
                             className='canchas-popup'
                         >
-                            <div className='cursor-pointer'>
-                                <div className='w-80 h-auto max-w-full aspect-[5/3] bg-black'>
-                                    <img
-                                        className='h-full w-full object-cover'
-                                        src={cancha.imagenes[0]}
-                                        alt={"imagen" + cancha.nombreCentro}
-                                    />
+                            <div className='card-canchas mapa cursor-pointer'>
+                                <div className='w-80 h-auto max-w-full aspect-[5/3] bg-neutral-200 dark:bg-neutral-800'>
+                                    <Swiper
+                                        pagination={true}
+                                        navigation={true}
+                                        modules={[Pagination, Navigation]}
+                                    >
+                                        {cancha.imagenes.map((imagen, index) => (
+                                            <SwiperSlide key={index}>
+                                                <img
+                                                    src={imagen}
+                                                    alt={cancha.nombreCentro}
+                                                    className="w-full h-full object-cover object-center aspect-[5/3]"
+                                                />
+                                                <div className='absolute top-0 left-0 w-full h-full select-none' style={{
+                                                    background: 'radial-gradient(circle, transparent 80%, rgba(0,0,0,.2) 100%)'
+                                                }} />
+                                            </SwiperSlide>
+                                        ))}
+                                    </Swiper>
                                 </div>
                                 <div className="py-3 px-4 dark:text-white flex flex-col gap-[2px]">
                                     <div className='flex items-center justify-between text-[15px]'>

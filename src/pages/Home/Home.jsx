@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchPanel from '../../components/canchas/searchPanel/SearchPanel'
 import SearchPanelMobile from '../../components/canchas/searchPanel/SearchPanelMobile'
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
@@ -11,6 +11,23 @@ import MarkerCancha from '../../components/canchas/Marker/MarkerCancha';
 
 const Home = () => {
   const [MapView, setMapView] = useState(false)
+  const [loadingStates, setLoadingStates] = useState(
+    Array(CANCHAS.length).fill(true)
+  );
+
+  useEffect(() => {
+    CANCHAS.forEach((_, index) => {
+      const delay = 2000 + index * 50; // El primero espera 2 segundos, los demás 200ms adicionales
+      setTimeout(() => {
+        setLoadingStates((prevStates) => {
+          const newStates = [...prevStates];
+          newStates[index] = false; // Marcar cancha como cargada
+          return newStates;
+        });
+      }, delay);
+    });
+  }, []);
+  
 
   return (
     <>
@@ -24,21 +41,22 @@ const Home = () => {
         <div className={`absolute h-full md:relative md:flex-1 w-full bg-neutral-50 dark:bg-neutral-950 transition-all ${MapView ? 'opacity-0 md:opacity-100 z-0' : 'z-[1]'}`}>
           <div className='w-full h-full overflow-auto'>
             <div className="w-full overflow-auto grid p-6 grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-x-6 gap-y-[40px]">
-              {CANCHAS.map((cancha, index) => (
+            {CANCHAS.map((cancha, index) => (
                 <CanchasCard
                   key={index}
                   nombre={cancha.nombreCentro}
-                  imagen={cancha.imagenes[0]}
+                  imagenes={cancha.imagenes}
                   instalaciones={cancha.instalaciones}
                   rating={cancha.rating}
+                  isLoading={loadingStates[index]}
                 />
               ))}
             </div>
           </div>
         </div>
         <div className={`absolute h-full md:relative md:flex-1 w-full max-w-[800px] bg-neutral-50 dark:bg-neutral-950 transition-all ${!MapView ? 'opacity-0 md:opacity-100 z-0' : 'z-[1]'}`}>
-          <Mapa>
-              <MarkerCancha data={CANCHAS} />
+          <Mapa zoom={12}>
+              <MarkerCancha data={CANCHAS}/>
           </Mapa>
         </div>
         <Button

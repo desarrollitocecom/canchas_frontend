@@ -1,9 +1,12 @@
 import React from "react";
-import { TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
+import { TextField, Button, InputAdornment, Checkbox, FormControlLabel } from "@mui/material";
 import { Link } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import InputPassword from '../../general/InputPassword';
 import { useFormik } from "formik";
+import { FormHelperText } from "@mui/material";
 import { validatePassword, validateConfirmPassword } from "../register/passwordValidation";
 
 const RegisterForm = () => {
@@ -21,23 +24,23 @@ const RegisterForm = () => {
     validate: (values) => {
       const errors = {};
       if (!values.firstName) {
-        errors.firstName = "El nombre es requerido";
+        errors.firstName = "nombre requerido";
       }
       if (!values.lastName) {
-        errors.lastName = "Los apellidos son requeridos";
+        errors.lastName = "apellidos requeridos";
       }
       if (!values.email) {
-        errors.email = "El correo electrónico es requerido";
+        errors.email = "correo electrónico requerido";
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
       ) {
         errors.email = "Correo electrónico inválido";
       }
       if (!values.dni) {
-        errors.dni = "El DNI es requerido";
+        errors.dni = "DNI requerido";
       }
       if (!values.phone) {
-        errors.phone = "El número de teléfono es requerido";
+        errors.phone = "celular requerido";
       } else if (values.phone.replace(/\s/g, "").length < 11) {
         errors.phone = "Número de teléfono inválido";
       }
@@ -72,7 +75,7 @@ const RegisterForm = () => {
       </h1>
 
       <form className="space-y-4 w-full" onSubmit={formik.handleSubmit}>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-5">
           <TextField
             label="Nombre"
             variant="outlined"
@@ -84,6 +87,7 @@ const RegisterForm = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
             helperText={formik.touched.firstName && formik.errors.firstName}
+            className={formik.touched.firstName && formik.errors.firstName ? 'animate-shake' : ''}
           />
           <TextField
             label="Apellidos"
@@ -96,6 +100,7 @@ const RegisterForm = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
             helperText={formik.touched.lastName && formik.errors.lastName}
+            className={formik.touched.lastName && formik.errors.lastName ? 'animate-shake' : ''}
           />
           <TextField
             label="Correo Electrónico"
@@ -109,7 +114,17 @@ const RegisterForm = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
-            className="col-span-2"
+            className={`col-span-2 ${formik.touched.firstName && formik.errors.firstName ? 'animate-shake' : ''}`}
+
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailRoundedIcon className='text-gray-400' />
+                  </InputAdornment>
+                )
+              }
+            }}
           />
           <TextField
             label="DNI"
@@ -122,6 +137,7 @@ const RegisterForm = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.dni && Boolean(formik.errors.dni)}
             helperText={formik.touched.dni && formik.errors.dni}
+            className={formik.touched.dni && formik.errors.dni ? 'animate-shake' : ''}
           />
           {/* Campo de teléfono */}
           <div className="flex flex-col gap-1">
@@ -168,32 +184,27 @@ const RegisterForm = () => {
               placeholder="Número de teléfono"
             />
             {formik.touched.phone && formik.errors.phone && (
-              <p className="text-sm mt-1" style={{ color: "#d32f2f" }}> {/* Color de error de Material UI */}
+              <FormHelperText style={{ color: "#d32f2f", marginTop: "2px" }}>
                 {formik.errors.phone}
-              </p>
+              </FormHelperText>
             )}
           </div>
-
-          <TextField
+          <InputPassword
             label="Contraseña"
-            type="password"
-            variant="outlined"
-            fullWidth
-            size="small"
             name="password"
+            size="small"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
+            className={formik.touched.password && formik.errors.password ? 'animate-shake' : ''}
           />
-          <TextField
+
+          <InputPassword
             label="Confirmar Contraseña"
-            type="password"
-            variant="outlined"
-            fullWidth
-            size="small"
             name="confirmPassword"
+            size="small"
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -204,7 +215,9 @@ const RegisterForm = () => {
             helperText={
               formik.touched.confirmPassword && formik.errors.confirmPassword
             }
+            className={formik.touched.confirmPassword && formik.errors.confirmPassword ? 'animate-shake' : ''}
           />
+
         </div>
         <FormControlLabel
           control={
@@ -219,12 +232,18 @@ const RegisterForm = () => {
           label={
             <span className="text-xs">
               Acepto los{" "}
-              <Link to="/terms" className="font-semibold hover:underline">
+              <a
+                href="/docs/terminos-y-condiciones.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-blue-600 hover:underline"
+              >
                 Términos y Condiciones
-              </Link>
+              </a>
             </span>
           }
         />
+
         {formik.touched.termsAccepted && formik.errors.termsAccepted && (
           <div className="text-red-500 text-xs">
             {formik.errors.termsAccepted}

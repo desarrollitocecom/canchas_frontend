@@ -5,25 +5,38 @@ import { FormHelperText } from "@mui/material";
 
 const PhoneInputField = ({ value, onChange, error, touched, onBlur, placeholder = "" }) => {
   const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  
+  // Color rojo consistente con el diseño
+  const errorColor = "#ff0000";
 
-  const darkModeStyles = {
-    backgroundColor: "#1e1e1e",
-    color: "#fff",
-    border: touched && error
-      ? "1px solid #ff6f6f"
-      : "1px solid rgba(255, 255, 255, 0.23)",
-  };
-
-  const lightModeStyles = {
-    backgroundColor: "#fff",
-    color: "#000",
-    border: touched && error
-      ? "1px solid #d32f2f"
-      : "1px solid rgba(0, 0, 0, 0.23)",
-  };
+  const customStyles = `
+    .react-tel-input .country-list {
+      background-color: ${isDarkMode ? '#2d2d2d' : '#fff'} !important;
+      color: ${isDarkMode ? '#fff' : '#000'} !important;
+    }
+    
+    .react-tel-input .country-list .country:hover {
+      background-color: ${isDarkMode ? '#404040' : '#f0f0f0'} !important;
+    }
+    
+    .react-tel-input .country-list .country.highlight {
+      background-color: ${isDarkMode ? '#404040' : '#f0f0f0'} !important;
+    }
+    
+    .react-tel-input .country-list .country {
+      color: ${isDarkMode ? '#fff' : '#000'} !important;
+    }
+    
+    .react-tel-input .selected-flag:hover,
+    .react-tel-input .selected-flag:focus,
+    .react-tel-input .selected-flag.open {
+      background-color: ${isDarkMode ? '#404040' : '#f0f0f0'} !important;
+    }
+  `;
 
   return (
     <div className="flex flex-col gap-1">
+      <style>{customStyles}</style>
       <PhoneInput
         country={"pe"}
         value={value}
@@ -38,7 +51,7 @@ const PhoneInputField = ({ value, onChange, error, touched, onBlur, placeholder 
           backgroundColor: isDarkMode ? "#1e1e1e" : "#fff",
           color: isDarkMode ? "#fff" : "#000",
           border: touched && error
-            ? `1px solid ${isDarkMode ? "#ff6f6f" : "#d32f2f"}`
+            ? `1px solid ${errorColor}`
             : `1px solid ${isDarkMode ? "rgba(255, 255, 255, 0.23)" : "rgba(0, 0, 0, 0.23)"}`,
         }}
         containerStyle={{ width: "100%" }}
@@ -47,26 +60,10 @@ const PhoneInputField = ({ value, onChange, error, touched, onBlur, placeholder 
           backgroundColor: "transparent",
           width: "40px",
         }}
-        dropdownStyle={{
-          zIndex: 100,
-          backgroundColor: isDarkMode ? "#2d2d2d" : "#fff",
-          color: isDarkMode ? "#fff" : "#000",
-          border: isDarkMode ? "1px solid #404040" : "1px solid #ccc",
-          borderRadius: "4px",
-          // Desactiva el hover cambiando el fondo a transparente
-          "& .country:hover": {
-            backgroundColor: "transparent",
-            color: isDarkMode ? "#fff" : "#000",
-          },
-        }}
-        containerClasses={`
-          [&_.country-list_.country:hover]:bg-transparent 
-          [&_.country-list_.country:hover]:text-current
-          [&_.selected-flag:hover]:bg-transparent
+        inputClass={`${touched && error ? "animate-shake" : ""}
+          hover:border-blue-500 focus:border-blue-500
+          dark:hover:border-blue-400 dark:focus:border-blue-400
         `}
-        inputClass={`${touched && error ? "animate-shake" : ""} 
-          hover:border-blue-500 focus:border-blue-500 
-          dark:hover:border-blue-400 dark:focus:border-blue-400`}
         placeholder={placeholder}
       />
       {touched && error && (
@@ -74,7 +71,7 @@ const PhoneInputField = ({ value, onChange, error, touched, onBlur, placeholder 
           error
           sx={{
             marginLeft: '1rem',
-            color: isDarkMode ? "#ff6f6f" : "#d32f2f"
+            color: errorColor
           }}
         >
           {error}

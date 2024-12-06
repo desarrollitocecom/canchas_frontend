@@ -1,12 +1,12 @@
 import React from "react";
 import { TextField, Button, InputAdornment, Checkbox, FormControlLabel } from "@mui/material";
 import { Link } from "react-router-dom";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+//import "react-phone-input-2/lib/style.css";
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import InputPassword from '../../general/InputPassword';
+import PhoneInputField from '../../general/PhoneInputField';
 import { useFormik } from "formik";
-import { FormHelperText } from "@mui/material";
+//import { FormHelperText } from "@mui/material";
 import { validatePassword, validateConfirmPassword } from "../register/passwordValidation";
 
 const RegisterForm = () => {
@@ -42,7 +42,7 @@ const RegisterForm = () => {
       if (!values.phone) {
         errors.phone = "celular requerido";
       } else if (values.phone.replace(/\s/g, "").length < 11) {
-        errors.phone = "Número de teléfono inválido";
+        errors.phone = "celular inválido";
       }
       // Validación de contraseña
       const passwordError = validatePassword(values.password);
@@ -141,54 +141,15 @@ const RegisterForm = () => {
           />
           {/* Campo de teléfono */}
           <div className="flex flex-col gap-1">
-            <PhoneInput
-              country={"pe"}
+            <PhoneInputField
               value={formik.values.phone}
               onChange={(phone) => formik.setFieldValue("phone", phone)}
-              inputStyle={{
-                width: "100%",
-                border: formik.touched.phone && formik.errors.phone
-                  ? "1px solid #d32f2f" // Rojo para errores
-                  : window.matchMedia("(prefers-color-scheme: dark)").matches // Detecta si está en modo oscuro
-                    ? "1px solid rgba(255, 255, 255, 0.23)" // Gris tenue para modo oscuro
-                    : "1px solid rgba(0, 0, 0, 0.23)", // Gris tenue para modo claro
-                borderRadius: "4px",
-                height: "40px",
-                backgroundColor: "var(--tw-bg-opacity)",
-                color: "var(--tw-text-opacity)",
-                fontSize: "14px",
-                paddingLeft: "48px",
-                paddingRight: "8px",
-                transition: "border-color 0.3s",
-              }}
-              containerStyle={{ width: "100%" }}
-              buttonStyle={{
-                border: "none",
-                backgroundColor: "transparent",
-                padding: "0",
-                margin: "0",
-                width: "40px", // Asegura un ancho adecuado para la bandera
-              }}
-              dropdownStyle={{
-                zIndex: 100,
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                overflowY: 'scroll',
-              }}
-              inputClass={`${formik.touched.phone && formik.errors.phone ? "animate-shake" : ""
-                } dark:bg-gray-800 dark:border-gray-500 dark:text-white`}
-              placeholder="Número de teléfono"
+              onBlur={() => formik.setFieldTouched("phone", true)}
+              error={formik.touched.phone && formik.errors.phone ? formik.errors.phone : null}
+              touched={formik.touched.phone}
             />
-            {formik.touched.phone && formik.errors.phone && (
-              <FormHelperText style={{ color: "#d32f2f", marginTop: "2px" }}>
-                {formik.errors.phone}
-              </FormHelperText>
-            )}
           </div>
+
           <InputPassword
             label="Contraseña"
             name="password"

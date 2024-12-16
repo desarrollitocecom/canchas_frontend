@@ -33,8 +33,8 @@ const PhotoGallery = ({ isGalleryOpen, setIsGalleryOpen, galleryImages }) => {
           {/* Botón de cierre (oculto cuando se abre CustomGallery) */}
           {!isCustomGalleryOpen && (
             <button
-              className="absolute top-4 right-4 text-white border border-neutral-700 hover:bg-red-500 p-3 rounded-full z-[10000]"
-              onClick={() => setIsGalleryOpen(false)}
+            className="fixed top-4 right-4 text-white border border-neutral-700 hover:bg-red-500 p-3 rounded-full z-[10000]"
+            onClick={() => setIsGalleryOpen(false)}
             >
               <CloseIcon sx={{ color: "white" }} />
             </button>

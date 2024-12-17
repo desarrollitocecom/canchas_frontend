@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import PublicRouter from './PublicRouter'
+import PrivateRouter from './PrivateRouter'
 import Login from '../pages/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/general/loader/Loader'
@@ -16,8 +17,9 @@ import OtpVerificacion from '../pages/ResetPassword/OtpVerificacion'
 import Layout from '../components/layouts/Layout'
 import ReservaLayout from '../components/layouts/ReservaLayout'
 import InformacionUsuario from '../pages/reserva/Informacion/InformacionUsuario'
-import Horarios from '../pages/reserva/Horarios/Horarios'
-import Pago from '../pages/reserva/Pago/Pago'
+import Horarios from '../pages/Reserva/Horarios/Horarios'
+import Pago from '../pages/Reserva/Pago/Pago'
+import Profile from '../pages/Profile/profile'
 
 const AppRouter = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -54,6 +56,10 @@ const AppRouter = () => {
         {
           path: "/info",
           element: <PublicRouter element={<Info />} />
+        },
+        {
+          path: "/profile",
+          element: <PublicRouter element={<Profile />} />
         },
         {
           path: '/',

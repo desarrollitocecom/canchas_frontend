@@ -35,8 +35,8 @@ const TablaHistorial = ({ data }) => {
             const { day, month } = formatDate(item.fecha);
             return (
               <Grid item xs={12} key={item.id}>
-                <Box display="flex" alignItems="flex-start"  sx={{ position: "relative" }}>
-                  <div>
+                <Box display="flex" alignItems="flex-start" sx={{ position: "relative" }} justifyContent="center">
+                  <div className="hidden md:flex">
                     {index < data.length - 1 && (
                       <Box
                         sx={{
@@ -72,7 +72,7 @@ const TablaHistorial = ({ data }) => {
                   <Card
                     elevation={3}
                     sx={{
-                      ml: 6,
+                      ml: { xs: 0, md: 6 }, 
                       flexGrow: 1,
                       display: "flex",
                       flexDirection: { sm: "row", xs: "column" },
@@ -125,10 +125,22 @@ const TablaHistorial = ({ data }) => {
                       <Divider sx={{ mb: 2 }} />
                       <Box
                         display="flex"
+                        flexDirection={{ xs: "column", sm: "row" }}
                         alignItems={{ xs: "center", md: "flex-start" }}
                         justifyContent={{ xs: "center", md: "space-between" }}
+                        gap={1}
+                        mt={1}
                       >
-                        <Typography color="textSecondary" variant="body2">
+                        <Typography
+                          color="textSecondary"
+                          variant="body2"
+                          sx={{
+                            fontSize: {
+                              xs: "0.875rem",
+                              sm: "1rem"
+                            }
+                          }}
+                        >
                           Estado de Pago:
                         </Typography>
                         {item.estadoPago === "Pagado" && (

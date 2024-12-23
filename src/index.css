@@ -152,7 +152,6 @@ div::-webkit-scrollbar-thumb {
     pointer-events: none !important;
 }
 
-
 @media (prefers-color-scheme: dark) {
     .invert-map {
         filter: brightness(0.6) invert(1) contrast(3) hue-rotate(360deg) saturate(0.3) brightness(0.7);

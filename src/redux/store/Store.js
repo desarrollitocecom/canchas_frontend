@@ -6,6 +6,7 @@ import { loadStateFromLocalStorage, saveStateToLocalStorage } from '../../helper
 import AuthSlice from '../slices/AuthSlice';
 import ThemeSlice from '../slices/ThemeSlice';
 import FiltersSlice from '../slices/FiltersSlice';
+import ReservaSlice from '../slices/ReservaSlice';
 
 
 const preloadedState = loadStateFromLocalStorage();
@@ -15,7 +16,8 @@ export const store = configureStore({
     reducer: {
         auth: AuthSlice,
         theme: ThemeSlice,
-        filters: FiltersSlice
+        filters: FiltersSlice,
+        reserva: ReservaSlice
     },
     preloadedState
 });

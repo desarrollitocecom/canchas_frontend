@@ -14,7 +14,7 @@ const SearchPanelMobile = () => {
     const [isActivePane, setisActivePane] = useState(false);
     const [activeMenu, setActiveMenu] = useState('deporte');
     const { deporte, fecha, time } = useSelector((state) => state.filters);
-    const { addParams } = UseUrlParamsManager();
+    const { addParams, removeParams } = UseUrlParamsManager();
 
     useEffect(() => {
         if (isActivePane) {
@@ -187,6 +187,7 @@ const SearchPanelMobile = () => {
                 <div className={`flex items-center justify-between p-4 px-7 ${isActivePane ? 'animate-fadeUp' : ''}`}>
                     <Button className='!capitalize' color='inherit' size='medium' onClick={() => {
                         setActiveMenu('deporte');
+                        removeParams();
                         dispatch(resetFiltros());
                     }}>
                         Limpiar todo

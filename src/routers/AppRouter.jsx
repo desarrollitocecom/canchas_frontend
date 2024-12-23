@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import PublicRouter from './PublicRouter'
+import PrivateRouter from './PrivateRouter'
 import Login from '../pages/Login/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/general/loader/Loader'
@@ -8,11 +9,17 @@ import Home from '../pages/Home/Home'
 import { createTheme, ThemeProvider, useMediaQuery } from '@mui/material'
 import { setDarkMode } from '../redux/slices/ThemeSlice'
 import Register from '../pages/Register/Register'
-import ReservaLayout from '../components/layouts/ReservaLayout'
+import ResetPassword from '../pages/ResetPassword/ResetPassword'
+import ChangePassword from '../pages/ChangePassword/ChangePassword'
+import ForgotUser from '../pages/ForgotUser/ForgotUser'
+import Info from '../pages/info/Info'
+import OtpVerificacion from '../pages/ResetPassword/OtpVerificacion'
 import Layout from '../components/layouts/Layout'
-import InformacionUsuario from '../pages/Reserva/Informacion/InformacionUsuario'
+import ReservaLayout from '../components/layouts/ReservaLayout'
+import InformacionUsuario from '../pages/reserva/Informacion/InformacionUsuario'
 import Horarios from '../pages/Reserva/Horarios/Horarios'
 import Pago from '../pages/Reserva/Pago/Pago'
+import Profile from '../pages/Profile/profile'
 
 const AppRouter = () => {
   const { loading } = useSelector((state) => state.auth);
@@ -29,6 +36,30 @@ const AppRouter = () => {
         {
           path: "/register",
           element: <PublicRouter element={<Register />} />
+        },
+        {
+          path: "/forgot-password",
+          element: <PublicRouter element={<ResetPassword />} />
+        },
+        {
+          path: "/otp-verification",
+          element: <PublicRouter element={<OtpVerificacion />} />
+        },
+        {
+          path: "/change-password",
+          element: <PublicRouter element={<ChangePassword />} />
+        },
+        {
+          path: "/forgot-user",
+          element: <PublicRouter element={<ForgotUser />} />
+        },
+        {
+          path: "/info",
+          element: <PublicRouter element={<Info />} />
+        },
+        {
+          path: "/profile",
+          element: <PublicRouter element={<Profile />} />
         },
         {
           path: '/',

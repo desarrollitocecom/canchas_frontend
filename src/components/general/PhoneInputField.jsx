@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { FormHelperText } from "@mui/material";
 
-const PhoneInputField = ({ value, onChange, error, touched, onBlur, placeholder = "" }) => {
+const PhoneInputField = ({ value, name, onChange, error, touched, onBlur, placeholder = "" }) => {
   const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  
+  const phoneInputRef = useRef(null);
+
+  const calculateDropdownPosition = () => {
+    if (phoneInputRef.current) {
+      const rect = phoneInputRef.current.getBoundingClientRect();
+      return {
+        top: `${rect.bottom}px`, // La parte inferior del input.
+        left: `${rect.left}px`, // La posición izquierda del input.
+        width: `${rect.width}px`, // Asegura que el dropdown tenga el mismo ancho que el input.
+      };
+    }
+    return {};
+  };
+
   // Color rojo consistente con el diseño
   const errorColor = "#ff0000";
 
@@ -38,7 +51,12 @@ const PhoneInputField = ({ value, onChange, error, touched, onBlur, placeholder 
     <div className="flex flex-col gap-1">
       <style>{customStyles}</style>
       <PhoneInput
+        inputProps={{
+          name: name,
+          error: touched && error
+        }}
         country={"pe"}
+        onlyCountries={["pe"]}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
@@ -64,6 +82,10 @@ const PhoneInputField = ({ value, onChange, error, touched, onBlur, placeholder 
           hover:border-blue-500 focus:border-blue-500
           dark:hover:border-blue-400 dark:focus:border-blue-400
         `}
+        dropdownStyle={{
+          position: "fixed",
+          ...calculateDropdownPosition(),
+        }}
         placeholder={placeholder}
       />
       {touched && error && (

@@ -9,6 +9,7 @@ import 'dayjs/locale/es';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -21,7 +22,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='es'>
-        <AppRouter />
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+          <AppRouter />
+        </GoogleOAuthProvider>
       </LocalizationProvider>
     </Provider>
   </StrictMode>,

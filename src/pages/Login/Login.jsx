@@ -8,6 +8,7 @@ import LoginForm from '../../components/auth/login/LoginForm';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import GoogleAuth from '../../components/auth/login/GoogleAuth';
 
 const Login = () => {
   const { darkMode } = useSelector((state) => state.theme);
@@ -46,7 +47,18 @@ const Login = () => {
               )}
 
           </div>
-          <LoginForm />
+          <div className='flex flex-col gap-5'>
+            <GoogleAuth />
+
+            {/* <div className="flex-1 border-t border-gray-300 dark:border-neutral-500"></div> */}
+            <div className="flex items-center gap-2">
+              <div className="flex-1 border-t border-gray-300 dark:border-neutral-500"></div>
+              <span className="text-gray-500 text-sm dark:text-neutral-300">o</span>
+              <div className="flex-1 border-t border-gray-300 dark:border-neutral-500"></div>
+            </div>
+
+            <LoginForm />
+          </div>
           <div className='mt-6 text-xs flex flex-col justify-center items-center gap-3'>
             <p className='flex gap-1 text-neutral-600 dark:text-neutral-300'>
               ¿No tienes una cuenta?

@@ -31,21 +31,11 @@ const Login = () => {
           </div>
 
           <div className='flex justify-center items-start mb-6'>
-            {darkMode ? (
-              <img
-                src={logo_claro}
-                alt="logo"
-                className="flex w-auto h-20"
-              />
-            ) :
-              (
-                <img
-                  src={logo}
-                  alt="logo"
-                  className="flex w-auto h-20"
-                />
-              )}
-
+            <img
+              src={darkMode ? logo_claro : logo}
+              alt="logo"
+              className="flex w-auto h-20"
+            />
           </div>
           <div className='flex flex-col gap-5'>
             <GoogleAuth />

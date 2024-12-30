@@ -6,7 +6,9 @@ import logo_claro from '../../assets/logos/sjl_logo_claro.png';
 import { Container } from '@mui/material';
 import RegisterForm from '../../components/auth/register/RegisterForm';
 import { Link } from 'react-router-dom';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import { useSelector } from 'react-redux';
+import GoogleAuth from '../../components/auth/login/GoogleAuth';
 
 const Register = () => {
     const { darkMode } = useSelector((state) => state.theme)
@@ -26,7 +28,13 @@ const Register = () => {
             ></div>
 
             <Container maxWidth="sm">
-                <div className="w-full flex flex-row items-center sm:shadow-lg sm:border bg-transparent sm:bg-white dark:sm:bg-neutral-900 dark:border-neutral-700 rounded-lg p-6 mb-16 z-10">
+                <div className="w-full flex flex-col items-center sm:shadow-lg sm:border bg-transparent sm:bg-white dark:sm:bg-neutral-900 dark:border-neutral-700 rounded-lg p-6 mb-16 z-10">
+                    <div className="mb-4 text-xs hidden sm:block w-full">
+                        <Link to="/" className='flex items-center gap-1 text-neutral-600 dark:text-neutral-300'>
+                            <ArrowBackIosNewRoundedIcon className='!size-3' />
+                            Volver
+                        </Link>
+                    </div>
                     {/* Formulario */}
                     <div className="flex flex-col w-full max-w-sm mx-auto">
                         <div className="flex justify-center items-start mb-6">
@@ -36,7 +44,21 @@ const Register = () => {
                                 className="h-16"
                             />
                         </div>
-                        <RegisterForm />
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                            Crear una Cuenta
+                        </h1>
+                        <div className='flex flex-col gap-5'>
+                            <GoogleAuth />
+
+                            {/* <div className="flex-1 border-t border-gray-300 dark:border-neutral-500"></div> */}
+                            <div className="flex items-center gap-2">
+                                <div className="flex-1 border-t border-gray-300 dark:border-neutral-500"></div>
+                                <span className="text-gray-500 text-sm dark:text-neutral-300">o</span>
+                                <div className="flex-1 border-t border-gray-300 dark:border-neutral-500"></div>
+                            </div>
+
+                            <RegisterForm />
+                        </div>
                         <div className="mt-6 text-xs text-center">
                             <p className="text-neutral-600 dark:text-neutral-300">
                                 ¿Ya tienes una cuenta?{' '}

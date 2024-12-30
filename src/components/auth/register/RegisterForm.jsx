@@ -70,10 +70,6 @@ const RegisterForm = () => {
   return (
     <div className="flex flex-col items-center">
       {/* Título centrado */}
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-        Crear una Cuenta
-      </h1>
-
       <form className="space-y-4 w-full" onSubmit={formik.handleSubmit}>
         <div className="grid grid-cols-2 gap-5">
           <TextField

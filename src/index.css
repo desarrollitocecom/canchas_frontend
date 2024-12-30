@@ -181,8 +181,4 @@ div::-webkit-scrollbar-thumb {
     .canchas-popup .leaflet-popup-content-wrapper{
         background-color: #000000 !important;
     }
-    .canchas-popup .leaflet-popup-close-button{
-        background-color: #000000 !important;
-        color: #fff !important;
-    }
 }
